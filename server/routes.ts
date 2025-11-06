@@ -31,6 +31,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Create Stripe Customer Portal session
+  app.post('/api/create-customer-portal-session', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      if (!user.stripeCustomerId) {
+        return res.status(400).json({ message: "No Stripe customer found. Please subscribe first." });
+      }
+
+      // Determine the return URL based on environment
+      let returnUrl = 'http://localhost:5000/dashboard?from=portal';
+      if (req.headers.origin) {
+        returnUrl = `${req.headers.origin}/dashboard?from=portal`;
+      } else if (process.env.REPL_SLUG && process.env.REPL_OWNER) {
+        returnUrl = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/dashboard?from=portal`;
+      }
+
+      // Create portal session
+      const session = await stripe.billingPortal.sessions.create({
+        customer: user.stripeCustomerId,
+        return_url: returnUrl,
+      });
+
+      res.json({ url: session.url });
+    } catch (error: any) {
+      console.error("Customer portal error:", error);
+      return res.status(400).json({ error: { message: error.message } });
+    }
+  });
+
   // Stripe subscription route
   app.post('/api/get-or-create-subscription', isAuthenticated, async (req: any, res) => {
     try {

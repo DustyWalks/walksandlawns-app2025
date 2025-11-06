@@ -15,10 +15,20 @@ export function Hero() {
   }, []);
 
   const handleSubscribe = () => {
-    window.location.href = "/api/login";
+    // Redirect to Stripe Payment Link
+    // The Payment Link should be configured in Stripe Dashboard to redirect to Customer Portal after payment
+    const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
+    if (paymentLink) {
+      window.location.href = paymentLink;
+    } else {
+      // Fallback to login flow if payment link not configured
+      console.warn("VITE_STRIPE_PAYMENT_LINK not configured. Using login flow.");
+      window.location.href = "/api/login";
+    }
   };
 
   const handleSignIn = () => {
+    // Sign in takes authenticated users to the Customer Portal
     window.location.href = "/api/login";
   };
 

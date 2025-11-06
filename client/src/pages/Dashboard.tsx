@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -9,11 +9,13 @@ import { ServiceHistory } from "@/components/dashboard/ServiceHistory";
 import { AddOnsManager } from "@/components/dashboard/AddOnsManager";
 import { ChatWidget } from "@/components/ChatWidget";
 import { LogOut, Menu } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
 import type { Booking, AddOn, UserAddOn } from "@shared/schema";
 
 export default function Dashboard() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -30,6 +32,42 @@ export default function Dashboard() {
     }
   }, [isAuthenticated, isLoading, toast]);
 
+  // Redirect to Stripe Customer Portal if user has a Stripe customer
+  // Only redirect if they're not coming back from the portal (check for ?from=portal param)
+  useEffect(() => {
+    const redirectToCustomerPortal = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const fromPortal = urlParams.get('from');
+      
+      // Don't redirect if user is returning from portal or if they explicitly want internal dashboard
+      if (fromPortal === 'portal' || !isAuthenticated || !user?.stripeCustomerId || isRedirecting) {
+        return;
+      }
+
+      setIsRedirecting(true);
+      try {
+        const response = await apiRequest("POST", "/api/create-customer-portal-session", {});
+        if (!response.ok) {
+          throw new Error('Failed to create portal session');
+        }
+        const data = await response.json();
+        if (data.url) {
+          window.location.href = data.url;
+        }
+      } catch (error) {
+        console.error("Failed to redirect to customer portal:", error);
+        toast({
+          title: "Error",
+          description: "Failed to open customer portal. Showing internal dashboard.",
+          variant: "destructive",
+        });
+        setIsRedirecting(false);
+      }
+    };
+
+    redirectToCustomerPortal();
+  }, [isAuthenticated, user, isRedirecting, toast]);
+
   const { data: bookings = [] } = useQuery<Booking[]>({
     queryKey: ["/api/bookings"],
     enabled: isAuthenticated,
@@ -45,10 +83,15 @@ export default function Dashboard() {
     enabled: isAuthenticated,
   });
 
-  if (isLoading) {
+  if (isLoading || isRedirecting) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full" />
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
+          {isRedirecting && (
+            <p className="text-muted-foreground">Redirecting to customer portal...</p>
+          )}
+        </div>
       </div>
     );
   }

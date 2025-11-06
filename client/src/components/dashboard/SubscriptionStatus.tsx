@@ -2,6 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Snowflake, Leaf, Calendar as CalendarIcon } from "lucide-react";
+import { useState } from "react";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 import type { User } from "@shared/schema";
 
 interface SubscriptionStatusProps {
@@ -9,6 +12,41 @@ interface SubscriptionStatusProps {
 }
 
 export function SubscriptionStatus({ user }: SubscriptionStatusProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleManageSubscription = async () => {
+    if (!user.stripeCustomerId) {
+      toast({
+        title: "No Subscription",
+        description: "You don't have an active subscription yet.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await apiRequest("POST", "/api/create-customer-portal-session", {});
+      if (!response.ok) {
+        throw new Error('Failed to create portal session');
+      }
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No portal URL received');
+      }
+    } catch (error) {
+      console.error("Failed to open customer portal:", error);
+      toast({
+        title: "Error",
+        description: "Failed to open customer portal. Please try again.",
+        variant: "destructive",
+      });
+      setIsLoading(false);
+    }
+  };
   const currentMonth = new Date().getMonth();
   const currentSeason = currentMonth >= 11 || currentMonth <= 2 ? "winter" : 
                        currentMonth >= 3 && currentMonth <= 5 ? "spring" :
@@ -104,8 +142,14 @@ export function SubscriptionStatus({ user }: SubscriptionStatusProps) {
         </div>
 
         {/* Manage Button */}
-        <Button variant="outline" className="w-full" data-testid="button-manage-subscription">
-          Manage Subscription
+        <Button 
+          variant="outline" 
+          className="w-full" 
+          onClick={handleManageSubscription}
+          disabled={isLoading}
+          data-testid="button-manage-subscription"
+        >
+          {isLoading ? "Opening..." : "Manage Subscription"}
         </Button>
       </CardContent>
     </Card>
