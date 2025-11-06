@@ -22,6 +22,13 @@ export function Hero() {
     window.location.href = "/api/login";
   };
 
+  const handleLearnMore = () => {
+    const chatButton = document.querySelector('[data-testid="button-chat-open"]') as HTMLButtonElement;
+    if (chatButton) {
+      chatButton.click();
+    }
+  };
+
   return (
     <section className="relative h-screen flex flex-col overflow-hidden">
       {/* Background Image with Dark Wash */}
@@ -53,7 +60,7 @@ export function Hero() {
               data-testid="button-sign-in"
             >
               <LogIn className="w-4 h-4" />
-              <span className="hidden sm:inline">Sign In</span>
+              <span className="hidden sm:inline">Member Access</span>
             </Button>
           </div>
         </div>
@@ -64,59 +71,58 @@ export function Hero() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-4xl mx-auto text-center">
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-1.5 mb-4">
               <CheckCircle className="w-4 h-4 text-primary-foreground" />
-              <span className="text-sm font-semibold text-primary-foreground">Trusted by 500+ West Edmonton Homeowners</span>
+              <span className="text-xs sm:text-sm font-semibold text-primary-foreground">Trusted by 120+ West Edmonton Homeowners</span>
             </div>
 
-            {/* Hero Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight tracking-tight">
-              Year-Round Property Care,<br />
-              <span className="text-primary-foreground">One Simple Subscription</span>
+            {/* Hero Headline - TWO WORDS */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-none tracking-tight">
+              Property<br />
+              <span className="text-primary-foreground">Automated</span>
             </h1>
 
             {/* Value Proposition */}
-            <p className="text-xl sm:text-2xl md:text-3xl text-white mb-8 leading-relaxed font-light">
-              <span className="font-bold text-white">$188/month</span> covers everything:<br />
-              <span className="text-lg sm:text-xl text-white/90">Snow removal • Weekly lawn care • Seasonal cleanups</span>
+            <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 leading-snug font-light max-w-2xl mx-auto">
+              <span className="font-bold text-white">$188/month</span> • Snow removal • Lawn care • Cleanups
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6">
               <Button
                 size="lg"
                 variant="default"
                 onClick={handleSubscribe}
-                className="text-lg px-10 py-7 shadow-2xl hover:shadow-3xl transition-all text-base sm:text-lg font-semibold min-w-[240px]"
+                className="text-base sm:text-lg px-8 py-6 shadow-2xl hover:shadow-3xl transition-all font-semibold min-w-[220px]"
                 data-testid="button-hero-cta"
               >
-                Start Your Subscription
+                Claim Your Spot
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-lg px-10 py-7 backdrop-blur-md bg-white/15 border-2 border-white/40 text-white hover:bg-white/25 transition-all font-semibold min-w-[240px]"
+                onClick={handleLearnMore}
+                className="text-base sm:text-lg px-8 py-6 backdrop-blur-md bg-white/15 border-2 border-white/40 text-white hover:bg-white/25 transition-all font-semibold min-w-[220px]"
                 data-testid="button-learn-more"
               >
-                How It Works
+                Ask Me Anything
               </Button>
             </div>
 
             {/* Key Benefits */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center text-white/90 text-sm sm:text-base">
+            <div className="flex flex-wrap gap-3 sm:gap-5 justify-center text-white/90 text-xs sm:text-sm">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-primary-foreground flex-shrink-0" />
+                <CheckCircle className="w-4 h-4 text-primary-foreground flex-shrink-0" />
                 <span>No Contracts</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-primary-foreground flex-shrink-0" />
-                <span>AI Automated</span>
+                <CheckCircle className="w-4 h-4 text-primary-foreground flex-shrink-0" />
+                <span>AI Scheduled</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-primary-foreground flex-shrink-0" />
-                <span>Local West Edmonton</span>
+                <CheckCircle className="w-4 h-4 text-primary-foreground flex-shrink-0" />
+                <span>West Edmonton</span>
               </div>
             </div>
           </div>

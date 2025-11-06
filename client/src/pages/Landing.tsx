@@ -10,15 +10,8 @@ import { ChatWidget } from "@/components/ChatWidget";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-screen overflow-hidden">
       <Hero />
-      <ValueProposition />
-      <Pricing />
-      <HowItWorks />
-      <Testimonials />
-      <FAQ />
-      <CTASection />
-      <Footer />
       <ChatWidget />
     </div>
   );
