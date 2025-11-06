@@ -77,15 +77,21 @@ export function Hero() {
             </div>
 
             {/* Hero Headline - TWO WORDS */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-none tracking-tight">
-              Property<br />
-              <span className="text-primary-foreground">Automated</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-5 leading-none tracking-tight">
+              Never<br />
+              <span className="text-primary-foreground">Again</span>
             </h1>
 
             {/* Value Proposition */}
-            <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 leading-snug font-light max-w-2xl mx-auto">
-              <span className="font-bold text-white">$188/month</span> • Snow removal • Lawn care • Cleanups
+            <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 leading-tight font-light max-w-3xl mx-auto">
+              Hate shoveling snow? Hate mowing lawns?<br />
+              <span className="font-semibold text-white">Your Freedom Subscription permanently removes<br className="hidden sm:block" /> property maintenance from your life.</span>
             </p>
+            
+            {/* Pricing */}
+            <div className="text-xl sm:text-2xl text-white/90 mb-6 font-light">
+              <span className="font-bold text-white">$188/month</span> • Set it and forget it
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6">
