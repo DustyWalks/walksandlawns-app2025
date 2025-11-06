@@ -89,12 +89,17 @@ export function Hero() {
             </p>
             
             {/* Pricing */}
-            <div className="text-xl sm:text-2xl text-white/90 mb-6 font-light">
-              <span className="font-bold text-white">$188/month</span> • Set it and forget it
+            <div className="mb-5">
+              <div className="text-xl sm:text-2xl text-white mb-2 font-light">
+                <span className="font-bold">$188/month</span> • Set it and forget it
+              </div>
+              <p className="text-xs sm:text-sm text-white/75 italic max-w-xl mx-auto">
+                We charge by the month of freedom. Our price is fixed—your time is not.
+              </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-4">
               <Button
                 size="lg"
                 variant="default"
