@@ -93,7 +93,7 @@ export function Hero() {
                 <span className="font-bold">$188/month</span> • Set it and forget it
               </div>
               <p className="text-xs sm:text-sm text-white/75 italic max-w-xl mx-auto">
-                We charge by the month of freedom. Our price is fixed—your time is not.
+                Our price is fixed—your time is not.
               </p>
             </div>
 
@@ -112,11 +112,11 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={handleLearnMore}
+                onClick={handleSignIn}
                 className="text-base sm:text-lg px-8 py-6 backdrop-blur-md bg-white/15 border-2 border-white/40 text-white hover:bg-white/25 transition-all font-semibold min-w-[220px]"
-                data-testid="button-learn-more"
+                data-testid="button-sign-in-secondary"
               >
-                Ask Me Anything
+                Sign In
               </Button>
             </div>
 
