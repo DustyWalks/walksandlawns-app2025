@@ -48,9 +48,9 @@ export function Hero() {
       <div className="relative z-10 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">Walks & Lawns</h2>
-              <span className="hidden sm:inline-block text-sm text-white/70 border-l border-white/30 pl-3">West Edmonton</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Myground.ca</h2>
+              <span className="text-xs sm:text-sm text-white/70 border-l border-white/30 pl-2 sm:pl-3">West Edmonton</span>
             </div>
             <Button
               variant="outline"
@@ -71,28 +71,34 @@ export function Hero() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-4xl mx-auto text-center">
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-1.5 mb-4">
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-1.5 mb-6">
               <CheckCircle className="w-4 h-4 text-primary-foreground" />
-              <span className="text-xs sm:text-sm font-semibold text-primary-foreground">Trusted by 120+ West Edmonton Homeowners</span>
+              <span className="text-xs sm:text-sm font-medium text-primary-foreground tracking-wide">Trusted by 120+ West Edmonton Homeowners</span>
             </div>
 
             {/* Hero Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight tracking-tight">
-              Your Forecast:<br />
-              <span className="text-primary-foreground">Zero Shoveling</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-thin text-white mb-2 leading-none tracking-tight">
+              Your Forecast:
             </h1>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-primary-foreground mb-5 leading-none tracking-tighter border-b-4 border-primary-foreground/30 inline-block pb-2">
+              ZERO SHOVELING
+            </h2>
 
             {/* Tagline */}
-            <p className="text-xl sm:text-2xl md:text-3xl text-white mb-6 leading-snug font-light">
-              Snow is Inevitable. Shoveling is Not.
+            <p className="text-xl sm:text-2xl md:text-3xl text-white mb-6 leading-tight">
+              <span className="font-extralight italic">Snow is Inevitable.</span><br />
+              <span className="font-bold">Shoveling is Not.</span>
             </p>
             
             {/* Pricing */}
             <div className="mb-5">
-              <div className="text-xl sm:text-2xl text-white mb-2 font-light">
-                <span className="font-bold">$188/month</span> • Set it and forget it
+              <div className="text-xl sm:text-2xl md:text-3xl text-white mb-1">
+                <span className="font-black">$188</span><span className="font-light text-lg sm:text-xl">/month</span>
               </div>
-              <p className="text-xs sm:text-sm text-white/75 italic max-w-xl mx-auto">
+              <p className="text-xs sm:text-sm text-white/70 font-light tracking-wide">
+                Set it and forget it
+              </p>
+              <p className="text-xs text-white/60 italic mt-1 font-light">
                 Our price is fixed—your time is not.
               </p>
             </div>
