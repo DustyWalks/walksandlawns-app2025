@@ -60,7 +60,7 @@ export function Hero() {
               data-testid="button-sign-in"
             >
               <LogIn className="w-4 h-4" />
-              <span className="hidden sm:inline">Member Access</span>
+              <span className="hidden sm:inline">Sign In</span>
             </Button>
           </div>
         </div>
@@ -76,16 +76,15 @@ export function Hero() {
               <span className="text-xs sm:text-sm font-semibold text-primary-foreground">Trusted by 120+ West Edmonton Homeowners</span>
             </div>
 
-            {/* Hero Headline - TWO WORDS */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-5 leading-none tracking-tight">
-              Never<br />
-              <span className="text-primary-foreground">Again</span>
+            {/* Hero Headline */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight tracking-tight">
+              Your Forecast:<br />
+              <span className="text-primary-foreground">Zero Shoveling</span>
             </h1>
 
-            {/* Value Proposition */}
-            <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 leading-tight font-light max-w-3xl mx-auto">
-              Hate shoveling snow? Hate mowing lawns?<br />
-              <span className="font-semibold text-white">Your Freedom Subscription permanently removes<br className="hidden sm:block" /> property maintenance from your life.</span>
+            {/* Tagline */}
+            <p className="text-xl sm:text-2xl md:text-3xl text-white mb-6 leading-snug font-light">
+              Snow is Inevitable. Shoveling is Not.
             </p>
             
             {/* Pricing */}
@@ -104,10 +103,10 @@ export function Hero() {
                 size="lg"
                 variant="default"
                 onClick={handleSubscribe}
-                className="text-base sm:text-lg px-8 py-6 shadow-2xl hover:shadow-3xl transition-all font-semibold min-w-[220px]"
+                className="text-base sm:text-lg px-8 py-6 shadow-2xl hover:shadow-3xl transition-all font-semibold min-w-[260px]"
                 data-testid="button-hero-cta"
               >
-                Claim Your Spot
+                Never Shovel Again Guaranteed
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button
